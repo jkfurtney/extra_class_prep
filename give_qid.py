@@ -24,8 +24,9 @@ with open("./questions.txt") as f:
             questions[qid] = [question, choices, answer]
 
 while True:
+    print("give a questions ID: ", end="")
     qid=input().upper()
-    if qid=="quit":
+    if qid=="QUIT":
         break
     if not qid in questions:
         print("not a question")
