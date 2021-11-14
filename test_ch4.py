@@ -24,7 +24,7 @@ with open("./questions.txt") as f:
             questions[qid] = [question, choices, answer]
 
 active_qids = []
-with open("./ch4.org") as f:
+with open("./ch6_full.org") as f:
     for line in f.readlines():
         qid= line.strip()
         active_qids.append(qid)
