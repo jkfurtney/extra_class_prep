@@ -1,9 +1,4 @@
 import re
-from prompt_toolkit import PromptSession
-
-session = PromptSession()
-
-
 
 question_pattern = re.compile("(^E\d[A-Z]\d\d)\s+\(([A-Z])\)")
 
@@ -28,27 +23,15 @@ with open("./questions.txt") as f:
             choices = {"A": a[3:], "B": b[3:], "C": c[3:], "D": d[3:]}
             questions[qid] = [question, choices, answer]
 
-while True:
-    qid = session.prompt('question id: ').upper()
-    if qid=="QUIT":
-        break
-    if not qid in questions:
-        print("not a question")
-    else:
-        question, choices, answer = questions[qid]
-        answered_correctly = False
-        while not answered_correctly:
-            print()
-            print(question)
-            print()
-            for letter in "ABCD":
-                print(f"{letter}.", choices[letter])
-            print()
-            a = input()
-            if a.upper() == answer:
-                print()
-                print("Correct")
-                answered_correctly = True
-            else:
-                print()
-                print("Wrong")
+
+longest = 0
+total = 0
+for q, (_, ch, ans) in questions.items():
+    letters = ["A","B","C","D"]
+    letters.remove(ans)
+    if len(ch["A"])>100:
+        total+=1
+        if len(ch[ans]) > max([len(ch[_]) for _ in letters]):
+            longest+=1
+
+print(longest/total, total)
